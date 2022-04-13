@@ -13,11 +13,11 @@ all:wakedemo-c.elf wakedemo-s.elf
 wakedemo-c.elf: ${COMMON_OBJECTS} wakedemo.o wdt_handler.o switch_interrupt_handler-c.o
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^ -lTimer -lLcd 
 
-load: wakedemo-c.elf
+load-c: wakedemo-c.elf
 	msp430loader.sh $^
 
 #assembly stuff
-wakedemo-s.elf: ${COMMON_OBJECTS} wakedemo.o wdt_handler.o switch_intterupt_handler-s.o
+wakedemo-s.elf: ${COMMON_OBJECTS} wakedemo.o wdt_handler.o switch_interrupt_handler-s.o
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^ -lTimer -lLcd 
 
 load-s: wakedemo-s.elf

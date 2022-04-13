@@ -9,7 +9,7 @@
 
 #define SWITCHES 15
 
-extern char switches_update_interrupt_sense();
-extern char switches_intterput_handler();
+extern char switch_update_interrupt_sense();
+extern char switch_interrupt_handler();
 extern int switches;
  
