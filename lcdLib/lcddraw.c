@@ -4,6 +4,79 @@
 #include "lcdutils.h"
 #include "lcddraw.h"
 
+void drawMega(u_char offc, u_char offr) {
+  u_char col = 0;
+  u_char row = 0;
+  while (row < 32) {
+    col = 0;
+    while (col < 32) {
+      if (mega[row][col] == 0)
+	drawPixel(col + offc, row+offr, COLOR_BLUE);
+       if (mega[row][col] == 1)
+	drawPixel(col + offc, row+offr, COLOR_BLACK);
+       if (mega[row][col] == 2)
+	drawPixel(col + offc, row+offr, COLOR_BLUE);
+       if (mega[row][col] == 3)
+	drawPixel(col + offc, row+offr, COLOR_TAN);
+       if (mega[row][col] == 4)
+	drawPixel(col + offc, row+offr, COLOR_TURQUOISE);
+       if (mega[row][col] == 5)
+	drawPixel(col + offc, row+offr, COLOR_SKY_BLUE);
+     if (mega[row][col] == 6)
+        drawPixel(col + offc, row+offr, COLOR_WHITE);
+      col++;
+    }
+    row++;
+  }   
+}
+
+void drawMega2(u_char offc, u_char offr) {
+  u_char col = 0;
+  u_char row = 0;
+  while (row < 32) {
+    col = 0;
+    while (col < 32) {
+      if (mega2[row][col] == 0)
+	drawPixel(col + offc, row+offr, COLOR_BLUE);
+       if (mega2[row][col] == 1)
+	drawPixel(col + offc, row+offr, COLOR_BLACK);
+       if (mega2[row][col] == 2)
+	drawPixel(col + offc, row+offr, COLOR_BLUE);
+       if (mega2[row][col] == 3)
+	drawPixel(col + offc, row+offr, COLOR_TAN);
+       if (mega2[row][col] == 4)
+	drawPixel(col + offc, row+offr, COLOR_TURQUOISE);
+       if (mega2[row][col] == 5)
+	drawPixel(col + offc, row+offr, COLOR_SKY_BLUE);
+     if (mega2[row][col] == 6)
+        drawPixel(col + offc, row+offr, COLOR_WHITE);
+      col++;
+    }
+    row++;
+  }   
+}
+
+void drawShoot(u_char offc, u_char offr) {
+  u_char col = 0;
+  u_char row = 0;
+  while (row < 32){
+    col = 0;
+    while(col < 32){
+      if(megaShoot[row][col] == 0)
+	drawPixel(col + offc, row+ offr, COLOR_BLUE);
+      if(megaShoot[row][col] == 1)
+	drawPixel(col + offc, row + offr, COLOR_BLACK);
+      if(megaShoot[row][col] == 2)
+	drawPixel(col + offc, row + offr, COLOR_BEIGE);
+      if(megaShoot[row][col] == 3)
+	drawPixel(col + offc, row + offr, COLOR_WHITE);
+      col++;
+    }
+    row++;
+  }
+}
+	 
+      
 
 /** Draw single pixel at x,row 
  *
@@ -72,6 +145,50 @@ void drawChar5x7(u_char rcol, u_char rrow, char c,
   }
 }
 
+void drawChar8x12(u_char rcol, u_char rrow, char c, 
+     u_int fgColorBGR, u_int bgColorBGR)
+{
+  u_int col = 0;
+  u_int row = 0;
+  u_int bit = 0x01;
+  u_int oc = c - 0x20;
+
+  lcd_setArea(rcol, rrow, rcol + 9, rrow + 12); /* relative to requested col/row */
+  while (row < 12) {
+    u_int row = font_8x12[oc][row];
+    while (col < 9) {
+      u_int colorBGR = (row & bit) ? fgColorBGR : bgColorBGR;
+      lcd_writeColor(colorBGR);
+      col++;
+      bit <<= 1;
+    }
+    col = 0;
+    bit = 0x01;
+    row++;
+  } 
+}
+
+void drawChar11x16(u_char rcol, u_char rrow, char c, 
+     u_int fgColorBGR, u_int bgColorBGR) 
+{
+  u_int col = 0;
+  u_int row = 0;
+  u_int bit = 0x01;
+  u_int oc = c - 0x20;
+
+  lcd_setArea(rcol, rrow, rcol + 10, rrow + 15); /* relative to requested col/row */
+  while (row < 16) {
+    while (col < 11) {
+      u_int colorBGR = (font_11x16[oc][col] & bit) ? fgColorBGR : bgColorBGR;
+      lcd_writeColor(colorBGR);
+      col++;
+    }
+    col = 0;
+    bit <<= 1;
+    row++;
+  }
+}
+
 /** Draw string at col,row
  *  Type:
  *  FONT_SM - small (5x8,) FONT_MD - medium (8x12,) FONT_LG - large (11x16)
@@ -94,6 +211,25 @@ void drawString5x7(u_char col, u_char row, char *string,
   }
 }
 
+void drawString8x12(u_char col, u_char row, char *string,
+		u_int fgColorBGR, u_int bgColorBGR)
+{
+  u_char cols = col;
+  while (*string) {
+    drawChar8x12(cols, row, *string++, fgColorBGR, bgColorBGR);
+    cols += 8;
+  }
+}
+
+void drawString11x16(u_char col, u_char row, char *string,
+		u_int fgColorBGR, u_int bgColorBGR)
+{
+  u_char cols = col;
+  while (*string) {
+    drawChar11x16(cols, row, *string++, fgColorBGR, bgColorBGR);
+    cols += 12;
+  }
+}
 
 /** Draw rectangle outline
  *  
