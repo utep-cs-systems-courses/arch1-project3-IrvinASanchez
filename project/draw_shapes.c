@@ -27,15 +27,15 @@ void mega_move(void)
 
 void draw_diamond(char center,char height, u_int shapeColor)
 {
-    for (u_char r = 0; r<11; r++){
+    for (u_char r = 0; r<50; r++){
         for(u_char c = 0; c<=r; c++){
 	  drawPixel(center+c, height+r, shapeColor);
 	  drawPixel(center-c, height+r, shapeColor);
 	  //drawString8x12(30,130,"PRESS START", COLOR_RED, COLOR_BLUE);
         }
     }
-    for (u_char c = 0; c<11; c++){
-        for(u_char r = 10; r<=20-c; r++){
+    for (u_char c = 0; c<50; c++){
+        for(u_char r = 49; r<=98-c; r++){
             drawPixel(center+c, height+r, shapeColor);
             drawPixel(center-c, height+r, shapeColor);
         }
@@ -47,21 +47,15 @@ void mega_shoot(void)
 {
   drawMega2(10,64);
   if(count == 1){
-    for(int i = 45; i < 100; i++){ 
+    for(int i = 45; i < 130;){
+      drawPixel(i,64,COLOR_BLUE);
       drawShoot(i,64);
+      i+=4;
     }
     count++;
   }
-  if(count == 2){
-    for(int i = 45; i < 100; i++){
-      drawShoot(i,64);
-    }
-    count++;
+  if(count >= 2){
+    count=1;
+    //clearScreen(COLOR_BLUE);
   }
-  if(count == 90){
-     drawShoot(80,64);
-     count++;
-  }
-  if(count >= blink_limit)
-    count=0;
 }

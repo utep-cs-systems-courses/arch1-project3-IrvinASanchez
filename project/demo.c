@@ -35,7 +35,6 @@ void main()
             case 2:
                 break;
             case 3:
-	        blink_limit = 120;
 	        mega_shoot();
                 break;
         }

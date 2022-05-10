@@ -25,6 +25,11 @@
 #define Bb_5 932.33
 #define B_3 246.94
 #define C_6 1046.50
+#define G 2551
+#define E 3033
+#define F 2863
+#define D 3405
+
 
 void buzzer_init();
 void buzzer_set_period(short cycles);

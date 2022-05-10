@@ -9,7 +9,7 @@
 extern short redrawScreen;
 extern char megaState, curr_state, color;
 extern int blink_limit, count;
-/* draws an hourglass shape */
+
 void update_shape(void);
 void mega_move(void);
 void draw_diamond(char center, char height, u_int shapeColor);
