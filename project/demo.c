@@ -34,7 +34,7 @@ void main()
                 break;
             case 2:
                 break;
-            case 3:
+	    case 3:// display megaman shooting
 	        mega_shoot();
                 break;
         }

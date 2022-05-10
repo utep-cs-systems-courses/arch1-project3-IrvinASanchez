@@ -34,8 +34,5 @@ const unsigned int megaShoot[32][32] = {
 };
 //0 = background
 //1= black
-//2=blue
-//3=beige
-//4=turqouise
-//5=light blue
-//6=white
+//2=Beige
+//3=white
